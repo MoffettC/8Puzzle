@@ -25,23 +25,34 @@ class NPuzzle(Problem):
         # dictionary, e.g. kwargs["keyname"], or passed to another function 
         # as if each entry was a keyword argument:
         #    e.g. foobar(arg1, arg2, …, argn, **kwargs).
-
+        
+        self.size = n
+        self.tileBoard = TileBoard(self.size, force_state)
+        #need to subclass Problem Class from library.......???????
+        self.solveState = self.tileBoard.solved() #????? saves solve state
+        
         raise NotImplemented
 
     def actions(self, state):
         "actions(state) - find a set of actions applicable to specified state"
-
-        raise NotImplemented
+        #create new board with specific state to check for poss moves???
+        actionBoard = TileBoard(self.size, state) 
+        actions = actionBoard.get_actions()
+        return actions
     
     def result(self, state, action):
         "result(state, action)- apply action to state and return new state"
-
-        raise NotImplemented
+        #is this right???????
+        actionBoard = TileBoard(self.size, state)
+        newboard = actionBoard.move(action) 
+        return newboard
     
     def goal_test(self, state):
         "goal_test(state) - Is state a goal?"
-
-        raise NotImplemented
+        if (state == self.solveState):
+            return True
+        else:
+            return False
 
     
         

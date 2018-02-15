@@ -36,6 +36,7 @@ Manhattan - city block heuristic search.  To restrict the complexity of
 """
 
 import math
+from explored import Explored
 
 # For each of the following classes, create classmethods g and h
 # with the following signatures
@@ -49,14 +50,54 @@ import math
 
 class BreadthFirst:
     "BredthFirst - breadthfirst search"
+    def __init__(self):
+        exploredSet = Explored()
+        return
+    
+    @classmethod
+    def g(cls, parentnode, action, childnode):
+        
+        return
+
+    @classmethod
+    def h(cls, state): 
+        
+        return
+    
     pass
 
 class DepthFirst:
     "DepthFirst - depth first search"
+    def __init__(self):
+        exploredSet = Explored()
+        return
+    
+    @classmethod
+    def g(cls, parentnode, action, childnode):
+        
+        return
+
+    @classmethod
+    def h(cls, state): 
+        
+        return
     pass
         
 class Manhattan:
     "Manhattan Block Distance heuristic"
+    def __init__(self):
+        exploredSet = Explored()
+        return
+    
+    @classmethod
+    def g(cls, parentnode, action, childnode):
+        
+        return
+
+    @classmethod
+    def h(cls, state): 
+        
+        return
     pass
                 
 
