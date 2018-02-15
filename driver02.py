@@ -25,8 +25,8 @@ def tock(t):
     return time.time() - t
     
 def driver() :
-
-    raise NotImplemented
+    test = TileBoard(8)
+    #raise NotImplemented
 
 if __name__ == '__main__':
     driver()
