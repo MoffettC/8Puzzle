@@ -92,10 +92,11 @@ def graph_search(problem, verbose=False, debug=False):
                     if not frontierNodes.__contains__(node): #not a duplicate in frontier
                         frontierNodes.append(node)
                        
-            done = frontierNodes.__len__  #if we run thru all frontier, search complete
-    
+            if (frontierNodes.__len__ == 0): #if we run thru all frontier, search complete
+                done = True
+                
     if found:
-        return (node.path(), node.solution()) #returns solution node's path/solution
+        return (node.solution(), node.path()) #returns solution node's path/solution
     else:
-        return (node.path(), "No solution found")     
+        return ("No solution found", node.path())     
 

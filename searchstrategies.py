@@ -52,8 +52,7 @@ class BreadthFirst:
     "BredthFirst - breadthfirst search"   
     @classmethod
     def g(cls, parentnode, action, childnode): 
-        parentnode.g += 1;
-        childnode.g = parentnode.g;
+        return parentnode.depth
 
     @classmethod
     def h(cls, state):      

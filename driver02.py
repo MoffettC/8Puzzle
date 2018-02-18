@@ -28,6 +28,7 @@ def driver() :
     puzzle = NPuzzle(8, g = BreadthFirst.g, h = BreadthFirst.h)
     (solution, nodesExpanded) = graph_search(puzzle, False, False)
     print(solution)
+    print(nodesExpanded)
     return
 
 if __name__ == '__main__':
