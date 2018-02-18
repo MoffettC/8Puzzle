@@ -49,33 +49,22 @@ from explored import Explored
  
 
 class BreadthFirst:
-    "BredthFirst - breadthfirst search"
-    def __init__(self):
-        exploredSet = Explored()
-        return
-    
+    "BredthFirst - breadthfirst search"   
     @classmethod
-    def g(cls, parentnode, action, childnode):
-        
-        return
+    def g(cls, parentnode, action, childnode): 
+        return parentnode + childnode;
 
     @classmethod
-    def h(cls, state): 
-        
-        return
+    def h(cls, state):      
+        return 0
     
     pass
 
 class DepthFirst:
     "DepthFirst - depth first search"
-    def __init__(self):
-        exploredSet = Explored()
-        return
-    
     @classmethod
     def g(cls, parentnode, action, childnode):
-        
-        return
+        return 0
 
     @classmethod
     def h(cls, state): 
@@ -85,10 +74,6 @@ class DepthFirst:
         
 class Manhattan:
     "Manhattan Block Distance heuristic"
-    def __init__(self):
-        exploredSet = Explored()
-        return
-    
     @classmethod
     def g(cls, parentnode, action, childnode):
         

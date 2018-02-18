@@ -70,5 +70,21 @@ def graph_search(problem, verbose=False, debug=False):
     path - list of actions to solve the problem or None if no solution was found
     nodes_explored - Number of nodes explored (dequeued from frontier)
     """
+    frontierStates = PriorityQueue()
+    frontierStates.append(problem.initial_state())
+    done = found = False
+    exploredStates = Explored()
+    
+    while not done:
+        node = frontierStates.get_node()
+        exploredStates.add(node)
+        
+        if node in problem.goals():
+            found = done = True
+        else:  
+            nodes = setdiff(results from actions(node), union(frontier, explored))
+            frontier.add_nodes(nodes)
+            done = frontier.is_empty()
+    return solution if found, else return fail
 
     raise NotImplemented

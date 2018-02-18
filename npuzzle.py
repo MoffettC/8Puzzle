@@ -28,10 +28,12 @@ class NPuzzle(Problem):
         
         self.size = n
         self.tileBoard = TileBoard(self.size, force_state)
+        super().__init__(self.tileBoard, self.tileBoard.solved(), **kwargs) #call parent class with tileboard?
+          
         #need to subclass Problem Class from library.......???????
         self.solveState = self.tileBoard.solved() #????? saves solve state
         
-        raise NotImplemented
+        return
 
     def actions(self, state):
         "actions(state) - find a set of actions applicable to specified state"
@@ -53,9 +55,3 @@ class NPuzzle(Problem):
             return True
         else:
             return False
-
-    
-        
-
-
-
