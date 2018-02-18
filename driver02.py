@@ -14,6 +14,7 @@ from problemsearch import graph_search
 import collections
 import time
 import searchstrategies
+import datetime
 
 
 def tic():
@@ -25,10 +26,16 @@ def tock(t):
     return time.time() - t
     
 def driver() :
+    start = tic()
+    print("Time Started ", datetime.datetime.now().time())
+   
     puzzle = NPuzzle(8, g = BreadthFirst.g, h = BreadthFirst.h)
     (solution, nodesExpanded) = graph_search(puzzle, False, False)
     print(solution)
     print(nodesExpanded)
+    
+    print("Time Ended ", datetime.datetime.now().time())
+    print("Time ", tock(start))
     return
 
 if __name__ == '__main__':

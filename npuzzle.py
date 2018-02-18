@@ -27,7 +27,7 @@ class NPuzzle(Problem):
         #    e.g. foobar(arg1, arg2, …, argn, **kwargs).
         
         self.size = n
-        self.tileBoard = TileBoard(self.size, True, force_state)
+        self.tileBoard = TileBoard(self.size, False, force_state)
         super().__init__(self.tileBoard, **kwargs) #call parent class with tileboard?
           
         return
@@ -38,19 +38,19 @@ class NPuzzle(Problem):
     def actions(self, state):
         "actions(state) - find a set of actions applicable to specified state"
         #create new board with specific state to check for poss moves???
-        actionBoard = TileBoard(self.size, True, state) 
+        actionBoard = TileBoard(self.size, False, state) 
         actions = actionBoard.get_actions()
         return actions
     
     def result(self, state, action):
         "result(state, action)- apply action to state and return new state"
-        actionBoard = TileBoard(self.size, True, state)
+        actionBoard = TileBoard(self.size, False, state)
         newboard = actionBoard.move(action) 
         return newboard.state_tuple()
     
     def goal_test(self, state):
         "goal_test(state) - Is state a goal?"
-        testBoard = TileBoard(self.size, True, state)
+        testBoard = TileBoard(self.size, False, state)
         if (testBoard.solved()):
             return True
         else:

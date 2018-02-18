@@ -5,7 +5,7 @@ Created on Feb 10, 2018
 '''
 
 from basicsearch_lib02.searchrep import (Node, print_nodes)
-from basicsearch_lib02.queues import PriorityQueue 
+from basicsearch_lib02.queues import PriorityQueue , FIFOQueue
 from explored import Explored
 import time
         
@@ -70,9 +70,14 @@ def graph_search(problem, verbose=False, debug=False):
     path - list of actions to solve the problem or None if no solution was found
     nodes_explored - Number of nodes explored (dequeued from frontier)
     """
-    frontierNodes = PriorityQueue()
     
-    node = Node(problem, problem.getInitialBoardState()) 
+    
+    node = Node(problem, problem.getInitialBoardState())
+    
+    frontierNodes = PriorityQueue(min, Node.get_f)
+    #frontierNodes = FIFOQueue()
+    nodesExplored = 0
+     
     for node in node.expand(problem):   
         frontierNodes.append(node) #get initial frontier nodes
         
@@ -81,22 +86,23 @@ def graph_search(problem, verbose=False, debug=False):
     
     while not done:
         node = frontierNodes.pop() #loop thru frontier states
-        exploredStates.add(node.state)
+        nodesExplored += 1
+        exploredStates.add(node)
         
         if problem.goal_test(node.state): #if found, set true
             found = done = True
 
         else:                       #if not, then add the new frontier states to the queue
             for node in node.expand(problem):
-                if not exploredStates.exists(node.state): #its not a duplicate in explored
+                if not exploredStates.exists(node): #its not a duplicate in explored
                     if not frontierNodes.__contains__(node): #not a duplicate in frontier
                         frontierNodes.append(node)
-                       
+
             if (frontierNodes.__len__ == 0): #if we run thru all frontier, search complete
                 done = True
                 
     if found:
-        return (node.solution(), node.path()) #returns solution node's path/solution
+        return (node.solution(), nodesExplored) #returns solution node's path/solution
     else:
-        return ("No solution found", node.path())     
+        return ("No solution found", nodesExplored)     
 

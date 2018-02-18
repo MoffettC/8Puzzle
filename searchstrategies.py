@@ -49,10 +49,10 @@ from explored import Explored
  
 
 class BreadthFirst:
-    "BredthFirst - breadthfirst search"   
+    "BredthFirst - breadthfirst search"   #FIFO Queue functionality
     @classmethod
     def g(cls, parentnode, action, childnode): 
-        return parentnode.depth
+        return parentnode.get_g() + 1
 
     @classmethod
     def h(cls, state):      
@@ -61,7 +61,7 @@ class BreadthFirst:
     pass
 
 class DepthFirst:
-    "DepthFirst - depth first search"
+    "DepthFirst - depth first search"   #LIFO Queue functionality
     @classmethod
     def g(cls, state): 
         return 0

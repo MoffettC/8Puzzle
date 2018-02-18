@@ -9,7 +9,7 @@ class Explored(object):
     def __init__(self):
         "__init__() - Create an empty explored set"
         self.exploredSet = []
-        size = 100
+        size = 100000
         i = 0
         while i < size:
             self.exploredSet.append([])
@@ -21,7 +21,7 @@ class Explored(object):
         """exists(state) - Has this state already been explored?
         Returns True or False, state must be hashable
         """
-        key = hash(state) % 100
+        key = hash(state) % 100000
         bucket = self.exploredSet[key]
         for exploredState in bucket:
             if exploredState == state:
