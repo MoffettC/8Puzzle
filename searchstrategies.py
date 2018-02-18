@@ -52,7 +52,8 @@ class BreadthFirst:
     "BredthFirst - breadthfirst search"   
     @classmethod
     def g(cls, parentnode, action, childnode): 
-        return parentnode + childnode;
+        parentnode.g += 1;
+        childnode.g = parentnode.g;
 
     @classmethod
     def h(cls, state):      
@@ -63,13 +64,12 @@ class BreadthFirst:
 class DepthFirst:
     "DepthFirst - depth first search"
     @classmethod
-    def g(cls, parentnode, action, childnode):
+    def g(cls, state): 
         return 0
 
     @classmethod
-    def h(cls, state): 
-        
-        return
+    def h(cls, parentnode, action, childnode): 
+        return parentnode + childnode;
     pass
         
 class Manhattan:

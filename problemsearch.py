@@ -70,21 +70,32 @@ def graph_search(problem, verbose=False, debug=False):
     path - list of actions to solve the problem or None if no solution was found
     nodes_explored - Number of nodes explored (dequeued from frontier)
     """
-    frontierStates = PriorityQueue()
-    frontierStates.append(problem.initial_state())
+    frontierNodes = PriorityQueue()
+    
+    node = Node(problem, problem.getInitialBoardState()) 
+    for node in node.expand(problem):   
+        frontierNodes.append(node) #get initial frontier nodes
+        
     done = found = False
-    exploredStates = Explored()
+    exploredStates = Explored() #hash table to store states
     
     while not done:
-        node = frontierStates.get_node()
-        exploredStates.add(node)
+        node = frontierNodes.pop() #loop thru frontier states
+        exploredStates.add(node.state)
         
-        if node in problem.goals():
+        if problem.goal_test(node.state): #if found, set true
             found = done = True
-        else:  
-            nodes = setdiff(results from actions(node), union(frontier, explored))
-            frontier.add_nodes(nodes)
-            done = frontier.is_empty()
-    return solution if found, else return fail
 
-    raise NotImplemented
+        else:                       #if not, then add the new frontier states to the queue
+            for node in node.expand(problem):
+                if not exploredStates.exists(node.state): #its not a duplicate in explored
+                    if not frontierNodes.__contains__(node): #not a duplicate in frontier
+                        frontierNodes.append(node)
+                       
+            done = frontierNodes.__len__  #if we run thru all frontier, search complete
+    
+    if found:
+        return (node.path(), node.solution()) #returns solution node's path/solution
+    else:
+        return (node.path(), "No solution found")     
+
