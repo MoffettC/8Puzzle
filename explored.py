@@ -9,9 +9,9 @@ class Explored(object):
     def __init__(self):
         "__init__() - Create an empty explored set"
         self.exploredSet = []
-        size = 100000
+        self.size = 100000
         i = 0
-        while i < size:
+        while i < self.size:
             self.exploredSet.append([])
             i=i+1
 
@@ -21,7 +21,7 @@ class Explored(object):
         """exists(state) - Has this state already been explored?
         Returns True or False, state must be hashable
         """
-        key = hash(state) % 100000
+        key = hash(state) % self.size
         bucket = self.exploredSet[key]
         for exploredState in bucket:
             if exploredState == state:
@@ -34,9 +34,8 @@ class Explored(object):
         """add(state) - add given state to the explored set.  
         state must be hashable and we asssume that it is not already in set
         """
-        if (not self.exists(state)):
-            key = hash(state) % 100
-            self.exploredSet[key].append(state) #add as long as its not a duplicate
+        key = hash(state) % self.size
+        self.exploredSet[key].append(state) #add as long as its not a duplicate
         
         # The hash function is a Python builtin that generates
         # a hash value from its argument.  Use this to create

@@ -34,6 +34,9 @@ class NPuzzle(Problem):
     
     def getInitialBoardState(self):
         return self.tileBoard.state_tuple()
+    
+    def generateDebugBoard(self, state):
+        return TileBoard(self.size, False, state)
 
     def actions(self, state):
         "actions(state) - find a set of actions applicable to specified state"

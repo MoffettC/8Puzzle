@@ -72,17 +72,19 @@ def graph_search(problem, verbose=False, debug=False):
     """
     
     
-    node = Node(problem, problem.getInitialBoardState())
     
     frontierNodes = PriorityQueue(min, Node.get_f)
-    #frontierNodes = FIFOQueue()
+    node = Node(problem, problem.getInitialBoardState())
     nodesExplored = 0
+    
+    exploredStates = Explored() #hash table to store states
+    exploredStates.add(node)
      
-    for node in node.expand(problem):   
-        frontierNodes.append(node) #get initial frontier nodes
+    for node in node.expand(problem):
+        if not exploredStates.exists(node): #its not a duplicate in explored
+            frontierNodes.append(node) #get initial frontier nodes
         
     done = found = False
-    exploredStates = Explored() #hash table to store states
     
     while not done:
         node = frontierNodes.pop() #loop thru frontier states
@@ -95,14 +97,42 @@ def graph_search(problem, verbose=False, debug=False):
         else:                       #if not, then add the new frontier states to the queue
             for node in node.expand(problem):
                 if not exploredStates.exists(node): #its not a duplicate in explored
-                    if not frontierNodes.__contains__(node): #not a duplicate in frontier
-                        frontierNodes.append(node)
+                    #if not frontierNodes.__contains__(node): #not a duplicate in frontier, slow!
+                    frontierNodes.append(node)
 
             if (frontierNodes.__len__ == 0): #if we run thru all frontier, search complete
                 done = True
                 
     if found:
+        if (verbose):
+            print("Moves to solution: ", node.path().__len__())
+            print("Nodes Expanded: ", nodesExplored)
+            
+            move = 0
+            solutionList = node.solution() 
+            boardList = []
+                
+            for node in node.path():
+                boardList.append(problem.generateDebugBoard(node.state))
+                
+            print("Initial State")    
+            for board in boardList:
+                counter = move + 1
+                print(board)
+                print()
+                if (move < boardList.__len__()-1):
+                    print("Move ", counter, " ", solutionList[move])
+                move += 1            
+        
+        if (debug):
+            print()
+            print("Debug Info:")
+            print(print_nodes(node.path()))
+            print()
+            
         return (node.solution(), nodesExplored) #returns solution node's path/solution
     else:
+        if (verbose | debug):
+            print("No solution found")
         return ("No solution found", nodesExplored)     
 

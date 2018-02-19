@@ -63,12 +63,12 @@ class BreadthFirst:
 class DepthFirst:
     "DepthFirst - depth first search"   #LIFO Queue functionality
     @classmethod
-    def g(cls, state): 
+    def g(cls, parentnode, action, childnode): 
         return 0
 
     @classmethod
-    def h(cls, parentnode, action, childnode): 
-        return parentnode + childnode;
+    def h(cls, state):      
+        return 0
     pass
         
 class Manhattan:

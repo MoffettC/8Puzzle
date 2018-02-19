@@ -16,7 +16,6 @@ import time
 import searchstrategies
 import datetime
 
-
 def tic():
     "Return current time representation"
     return time.time()
@@ -26,16 +25,27 @@ def tock(t):
     return time.time() - t
     
 def driver() :
-    start = tic()
-    print("Time Started ", datetime.datetime.now().time())
-   
-    puzzle = NPuzzle(8, g = BreadthFirst.g, h = BreadthFirst.h)
-    (solution, nodesExpanded) = graph_search(puzzle, False, False)
-    print(solution)
-    print(nodesExpanded)
+    stepsList = []
+    nodesList = []
+    timeList = []
     
-    print("Time Ended ", datetime.datetime.now().time())
-    print("Time ", tock(start))
+    i = 0
+    trials = 1
+    while i < trials:
+        start = tic()
+        puzzle = NPuzzle(8, g = DepthFirst.g, h = DepthFirst.h)
+        (solution, nodesExpanded) = graph_search(puzzle, False, False)
+    
+        stepsList.append(solution.__len__())
+        nodesList.append(nodesExpanded)
+        timeList.append(tock(start))
+        print("Trial ", i, " Complete")
+        i += 1
+    
+    print("Mean Steps: ", mean(stepsList), " Std Dev Steps: ", stdev(stepsList))
+    print("Mean Nodes Expanded: ", mean(nodesList), " Std Dev Nodes Expanded: ", stdev(nodesList))
+    print("Mean Time: ", mean(timeList), " Std Dev Time: ", stdev(timeList))
+
     return
 
 if __name__ == '__main__':
