@@ -40,7 +40,6 @@ class NPuzzle(Problem):
 
     def actions(self, state):
         "actions(state) - find a set of actions applicable to specified state"
-        #create new board with specific state to check for poss moves???
         actionBoard = TileBoard(self.size, False, state) 
         actions = actionBoard.get_actions()
         return actions

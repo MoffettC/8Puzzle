@@ -30,10 +30,10 @@ def driver() :
     timeList = []
     
     i = 0
-    trials = 1
+    trials = 2
     while i < trials:
         start = tic()
-        puzzle = NPuzzle(8, g = DepthFirst.g, h = DepthFirst.h)
+        puzzle = NPuzzle(8, g = Manhattan.g, h = Manhattan.h)
         (solution, nodesExpanded) = graph_search(puzzle, False, False)
     
         stepsList.append(solution.__len__())
