@@ -1,4 +1,5 @@
-
+#Christopher Moffett and Margaret Lee 
+#819886646               817587037
 
 from basicsearch_lib02.tileboard import TileBoard
 from basicsearch_lib02.searchrep import Problem

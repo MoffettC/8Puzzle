@@ -1,3 +1,6 @@
+#Christopher Moffett and Margaret Lee 
+#819886646               817587037
+
 '''
 Created on Feb 8, 2018
 
@@ -9,7 +12,7 @@ class Explored(object):
     def __init__(self):
         "__init__() - Create an empty explored set"
         self.exploredSet = []
-        self.size = 100000
+        self.size = 100000 #buckets
         i = 0
         while i < self.size:
             self.exploredSet.append([])
