@@ -1,3 +1,6 @@
+#Christopher Moffett and Margaret Lee 
+#819886646               817587037
+
 '''
 driver for graph search problem
 Created on Feb 10, 2018
@@ -30,11 +33,11 @@ def driver() :
     timeList = []
     
     i = 0
-    trials = 2
+    trials = 1
     while i < trials:
         start = tic()
         puzzle = NPuzzle(8, g = Manhattan.g, h = Manhattan.h)
-        (solution, nodesExpanded) = graph_search(puzzle, False, False)
+        (solution, nodesExpanded) = graph_search(puzzle, True, True)
     
         stepsList.append(solution.__len__())
         nodesList.append(nodesExpanded)
@@ -42,6 +45,7 @@ def driver() :
         print("Trial ", i, " Complete")
         i += 1
     
+    print("DFC")
     print("Mean Steps: ", mean(stepsList), " Std Dev Steps: ", stdev(stepsList))
     print("Mean Nodes Expanded: ", mean(nodesList), " Std Dev Nodes Expanded: ", stdev(nodesList))
     print("Mean Time: ", mean(timeList), " Std Dev Time: ", stdev(timeList))

@@ -67,7 +67,7 @@ class DepthFirst:
     "DepthFirst - depth first search"   #LIFO Queue functionality
     @classmethod
     def g(cls, parentnode, action, childnode): 
-        return -(childnode.depth)
+        return -(parentnode.depth)
 
     @classmethod
     def h(cls, state):      
@@ -78,9 +78,9 @@ class Manhattan:
     "Manhattan Block Distance heuristic"
     @classmethod
     def g(cls, parentnode, action, childnode):
-        if (parentnode.depth != childnode.depth):
-            return childnode.depth * 2
-        return parentnode.g 
+        if (parentnode.depth == childnode.depth):
+            return parentnode.g
+        return parentnode.depth * 2 
 
     @classmethod
     def h(cls, state): 
