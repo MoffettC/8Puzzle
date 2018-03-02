@@ -39,7 +39,6 @@ Manhattan - city block heuristic search.  To restrict the complexity of
 """
 
 import math
-from explored import Explored
 
 # For each of the following classes, create classmethods g and h
 # with the following signatures

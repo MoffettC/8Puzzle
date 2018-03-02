@@ -1,7 +1,6 @@
-
 import math
 
-class Board:
+class Board(object):
     """Grid board class
     Represent a two dimensional grid of items
     """
@@ -19,6 +18,7 @@ class Board:
         # in row-major order (rows indexed first)
         self.board = \
             [[None for c in range(cols)] for r in range(rows)]
+
 
     def place(self, row, col, item):
         "place an item"
@@ -80,7 +80,4 @@ class Board:
             r = r + 1
         # concatenate list into a string
         return "\n".join(lines)
-
-        
-
     
