@@ -46,8 +46,13 @@ class Strategy(abstractstrategy.Strategy):
         determined via a game tree search (e.g. minimax with alpha-beta
         pruning).
         """
+        search = AlphaBetaSearch(Strategy, self.maxplayer, self.minplayer, self.maxplies)
+        bestMove = search.alphabeta(board)
+        newboard = board.clone()
         
-        raise NotImplementedError("Subclass must implement")
+        #apply bestMove to a clone of board
+        
+        return (newboard, bestMove)
 
 class AlphaBetaSearch:
     """AlphaBetaSearch
@@ -70,12 +75,20 @@ class AlphaBetaSearch:
         maxplies - Maximum ply depth to search
         verbose - Output debugging information
         """
+        self.strategy = strategy
+        self.maxP = maxplayer
+        self.minP = minplayer
+        self.plies = maxplies
+        
     def alphabeta(self, state):
         """alphbeta (state) 
         - Run an alphabeta search from the current state.  Returns best action.
         """ 
+        
+        initialVal = self.strategy.utility(state) #eval board
+        #move down tree, eval child boards, one of these initial moves is a best action
+        #repeat until hitting max plies, prune along the way
+        #return best action
+        
+         
     # define other helper methods as needed
-    
-    
-    
-    
