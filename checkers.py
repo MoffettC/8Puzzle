@@ -61,16 +61,18 @@ def Game(red=human.Strategy, black=tonto.Strategy,
     redplayer = red('r', checkerGame, maxplies)
     blackplayer = black('b', checkerGame, maxplies)
 
-    checkerGame = redplayer.play(checkerGame)  
+    results = redplayer.play(checkerGame)
+    checkerGame = results[0]
     won = False
     
     while (not won):
-        
-        x = checkerGame.CheckerBoard().is_terminal()
+        x = checkerGame.is_terminal()
         won = x[0]
         
-        checkerGame = blackplayer.play(checkerGame)
-        checkerGame = redplayer.play(checkerGame)
+        results = blackplayer.play(checkerGame)
+        checkerGame = results[0]
+        results = redplayer.play(checkerGame)
+        checkerGame = results[0]
     
     print("Finished")
     return
