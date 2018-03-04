@@ -21,10 +21,6 @@ import tonto
 # human - human player, prompts for input    
 import human
 
-import boardlibrary # might be useful for debuggingimport tonto
-import human
-
-
 import boardlibrary # might be useful for debugging
 
 def elapsed(earlier, later):
@@ -60,7 +56,24 @@ def Game(red=human.Strategy, black=tonto.Strategy,
     # Don't forget to create instances of your strategy,
     # e.g. black('b', checkerboard.CheckerBoard, maxplies)
     
-    raise NotImplemented
+    checkerGame = checkerboard.CheckerBoard()
+    
+    redplayer = red('r', checkerGame, maxplies)
+    blackplayer = black('b', checkerGame, maxplies)
+
+    checkerGame = redplayer.play(checkerGame)  
+    won = False
+    
+    while (not won):
+        
+        x = checkerGame.CheckerBoard().is_terminal()
+        won = x[0]
+        
+        checkerGame = blackplayer.play(checkerGame)
+        checkerGame = redplayer.play(checkerGame)
+    
+    print("Finished")
+    return
 
 
 if __name__ == "__main__":
