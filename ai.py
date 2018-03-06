@@ -27,17 +27,17 @@ class Strategy(abstractstrategy.Strategy):
         "Return the utility of the specified board"
         val = 0
         
-        boardTuple = board.board
+        boardTuple = board
         for row in boardTuple:
             col = 0;
             for piece in row:
-                if CheckerBoard.isplayer(board.maxplayer, piece):
+                if CheckerBoard.isplayer(self.maxplayer, piece):
                     val += 1
                     if  CheckerBoard.isking(piece):
                         val += 2
                     if (row == 3 & col == 4) | (row == 4 & col == 3):
                         val += 3
-                if CheckerBoard.isplayer(board.minplayer, piece):
+                if CheckerBoard.isplayer(self.minplayer, piece):
                     val -= 1
                     if  CheckerBoard.isking(piece):
                         val -= 2
@@ -53,7 +53,7 @@ class Strategy(abstractstrategy.Strategy):
         determined via a game tree search (e.g. minimax with alpha-beta
         pruning).
         """
-        search = AlphaBetaSearch(Strategy, self.maxplayer, self.minplayer, self.maxplies)
+        search = AlphaBetaSearch(self, self.maxplayer, self.minplayer, self.maxplies)
         bestMove = search.alphabeta(board)
         newboard = board.move(bestMove) #apply bestMove to a clone of board
         
@@ -93,9 +93,9 @@ class AlphaBetaSearch:
 #         initialVal = self.strategy.utility(self.strategy, self.board) #eval board
 
         v = self.maxvalue(state, alpha = float("-inf"), beta = float("inf"))
-        actions =  self.board.get_actions(self.maxP) #maxplayer will always be the side that called it  
-        for a in actions:
-            if 
+        actions =  self.strategy.curGame.get_actions(self.maxP) #maxplayer will always be the side that called it  
+#         for a in actions:
+#             if 
         return 
         
         #move down tree, eval child boards, one of these initial moves is a best action
@@ -105,7 +105,7 @@ class AlphaBetaSearch:
     # define other helper methods as needed   
     def maxvalue(self, state, alpha, beta):
         if CheckerBoard.is_terminal(self.strategy.curGame):
-            val = self.strategy.utility(self.strategy, self.board)
+            v = self.strategy.utility(self.strategy.curGame.board)
         else:
             v = float('-inf')
             actions = self.board.get_actions(self.maxP)
@@ -120,7 +120,7 @@ class AlphaBetaSearch:
     
     def minvalue(self, state, alpha, beta):
         if CheckerBoard.is_terminal(self.strategy.curGame):
-            val = self.strategy.utility(self.strategy, self.board)
+            v = self.strategy.utility(self.strategy.curGame.board)
         else:
             v  = float("inf")
             actions = self.board.get_actions(self.minP)
