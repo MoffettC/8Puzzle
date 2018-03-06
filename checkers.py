@@ -20,7 +20,7 @@ import tonto
 
 # human - human player, prompts for input    
 import human
-
+import ai
 import boardlibrary # might be useful for debugging
 
 def elapsed(earlier, later):
@@ -42,7 +42,7 @@ def elapsed(earlier, later):
     return time.strftime('%H:%M:%S', time.gmtime(later - earlier))
            
 
-def Game(red=human.Strategy, black=tonto.Strategy, 
+def Game(red=human.Strategy, black=ai.Strategy, 
          maxplies=5, init=None, verbose=True, firstmove=0):
     """Game(red, black, maxplies, init, verbose, turn)
     Start a game of checkers

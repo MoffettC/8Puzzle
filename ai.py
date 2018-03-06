@@ -4,6 +4,7 @@ ai - search & strategy module
 implement a concrete Strategy class and AlphaBetaSearch
 """
 import abstractstrategy
+from checkerboard import CheckerBoard
 
 class Strategy(abstractstrategy.Strategy):
     def __init__(self, player, game, maxplies):
@@ -24,20 +25,26 @@ class Strategy(abstractstrategy.Strategy):
     
     def utility(self, board):
         "Return the utility of the specified board"
-        redVal = 0
-        blackVal = 0
-        redPieces =  self.curGame.piece_types('r')
-        blackPieces =  self.curGame.piece_types('b')
+        val = 0
         
-        for piece in redPieces:
-            if  self.curGame.isking(piece):
-                redVal += 2
-                
-        for piece in blackPieces:
-            if  self.curGame.isking(piece):
-                blackVal += 2
-        
-        return (redVal, blackVal)
+        boardTuple = board.board
+        for row in boardTuple:
+            col = 0;
+            for piece in row:
+                if CheckerBoard.isplayer(board.maxplayer, piece):
+                    val += 1
+                    if  CheckerBoard.isking(piece):
+                        val += 2
+                    if (row == 3 & col == 4) | (row == 4 & col == 3):
+                        val += 3
+                if CheckerBoard.isplayer(board.minplayer, piece):
+                    val -= 1
+                    if  CheckerBoard.isking(piece):
+                        val -= 2
+                    if (row == 3 & col == 4) | (row == 4 & col == 3):
+                        val -= 3                      
+                col += 1 
+        return val
     
     def play(self, board):
         """"play - Make a move
@@ -48,9 +55,7 @@ class Strategy(abstractstrategy.Strategy):
         """
         search = AlphaBetaSearch(Strategy, self.maxplayer, self.minplayer, self.maxplies)
         bestMove = search.alphabeta(board)
-        newboard = board.clone()
-        
-        #apply bestMove to a clone of board
+        newboard = board.move(bestMove) #apply bestMove to a clone of board
         
         return (newboard, bestMove)
 
@@ -84,11 +89,46 @@ class AlphaBetaSearch:
         """alphbeta (state) 
         - Run an alphabeta search from the current state.  Returns best action.
         """ 
+#         self.board = state
+#         initialVal = self.strategy.utility(self.strategy, self.board) #eval board
+
+        v = self.maxvalue(state, alpha = float("-inf"), beta = float("inf"))
+        actions =  self.board.get_actions(self.maxP) #maxplayer will always be the side that called it  
+        for a in actions:
+            if 
+        return 
         
-        initialVal = self.strategy.utility(state) #eval board
         #move down tree, eval child boards, one of these initial moves is a best action
         #repeat until hitting max plies, prune along the way
         #return best action
-        
          
-    # define other helper methods as needed
+    # define other helper methods as needed   
+    def maxvalue(self, state, alpha, beta):
+        if CheckerBoard.is_terminal(self.strategy.curGame):
+            val = self.strategy.utility(self.strategy, self.board)
+        else:
+            v = float('-inf')
+            actions = self.board.get_actions(self.maxP)
+            for a in actions:
+                newboard = self.strategy.curGame.board.move(a)
+                v = beta(v, self.minvalue(newboard, a), alpha, beta)
+                if v >= beta:
+                    break
+                else:
+                    alpha = beta(beta, v) 
+        return v
+    
+    def minvalue(self, state, alpha, beta):
+        if CheckerBoard.is_terminal(self.strategy.curGame):
+            val = self.strategy.utility(self.strategy, self.board)
+        else:
+            v  = float("inf")
+            actions = self.board.get_actions(self.minP)
+            for a in actions:
+                newboard = self.strategy.curGame.board.move(a)
+                v = alpha(v, self.maxvalue(newboard, a), alpha, beta)
+                if v <= alpha:
+                    break
+                else:
+                    beta = alpha(alpha, v) 
+        return v
