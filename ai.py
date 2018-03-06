@@ -84,6 +84,7 @@ class AlphaBetaSearch:
         self.maxP = maxplayer
         self.minP = minplayer
         self.plies = maxplies
+        self.depthLvl = 0
         
     def alphabeta(self, state):
         """alphbeta (state) 
@@ -92,7 +93,7 @@ class AlphaBetaSearch:
 #         self.board = state
 #         initialVal = self.strategy.utility(self.strategy, self.board) #eval board
 
-        v = self.maxvalue(state, alpha = float("-inf"), beta = float("inf"))
+        v = self.maxvalue(state, self.plies, alpha = float("-inf"), beta = float("inf"))
         actions =  self.strategy.curGame.get_actions(self.maxP) #maxplayer will always be the side that called it  
 #         for a in actions:
 #             if 
@@ -103,30 +104,38 @@ class AlphaBetaSearch:
         #return best action
          
     # define other helper methods as needed   
-    def maxvalue(self, state, alpha, beta):
-        if CheckerBoard.is_terminal(self.strategy.curGame):
+    def maxvalue(self, depth, state, alpha, beta):
+        self.depthLvl += 1
+        isDone = CheckerBoard.is_terminal(self.strategy.curGame)
+        if isDone[0]:
             v = self.strategy.utility(self.strategy.curGame.board)
+        elif self.depthLvl == depth:
+            return v    
         else:
             v = float('-inf')
-            actions = self.board.get_actions(self.maxP)
+            actions = self.strategy.curGame.get_actions(self.maxP)
             for a in actions:
-                newboard = self.strategy.curGame.board.move(a)
-                v = beta(v, self.minvalue(newboard, a), alpha, beta)
+                newboard = self.strategy.curGame.move(a)
+                v = max(v, self.minvalue(newboard, depth, alpha, beta))
                 if v >= beta:
                     break
                 else:
                     alpha = beta(beta, v) 
         return v
     
-    def minvalue(self, state, alpha, beta):
-        if CheckerBoard.is_terminal(self.strategy.curGame):
+    def minvalue(self, depth, state, alpha, beta):
+        self.depthLvl += 1
+        isDone = CheckerBoard.is_terminal(self.strategy.curGame)
+        if isDone[0]:
             v = self.strategy.utility(self.strategy.curGame.board)
+        elif self.depthLvl == depth:
+            return v
         else:
             v  = float("inf")
-            actions = self.board.get_actions(self.minP)
+            actions = self.strategy.curGame.get_actions(self.minP)
             for a in actions:
-                newboard = self.strategy.curGame.board.move(a)
-                v = alpha(v, self.maxvalue(newboard, a), alpha, beta)
+                newboard = self.strategy.curGame.move(a)
+                v = min(v, self.maxvalue(newboard, depth, alpha, beta))
                 if v <= alpha:
                     break
                 else:
