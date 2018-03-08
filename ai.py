@@ -93,7 +93,7 @@ class AlphaBetaSearch:
 #         self.board = state
 #         initialVal = self.strategy.utility(self.strategy, self.board) #eval board
 
-        v = self.maxvalue(state, self.plies, alpha = float("-inf"), beta = float("inf"))
+        v = self.maxvalue(self.plies, state, alpha = float("-inf"), beta = float("inf"))
         actions =  self.strategy.curGame.get_actions(self.maxP) #maxplayer will always be the side that called it  
 #         for a in actions:
 #             if 
@@ -116,7 +116,7 @@ class AlphaBetaSearch:
             actions = self.strategy.curGame.get_actions(self.maxP)
             for a in actions:
                 newboard = self.strategy.curGame.move(a)
-                v = max(v, self.minvalue(newboard, depth, alpha, beta))
+                v = max(v, self.minvalue(depth, newboard, alpha, beta))
                 if v >= beta:
                     break
                 else:
@@ -135,7 +135,7 @@ class AlphaBetaSearch:
             actions = self.strategy.curGame.get_actions(self.minP)
             for a in actions:
                 newboard = self.strategy.curGame.move(a)
-                v = min(v, self.maxvalue(newboard, depth, alpha, beta))
+                v = min(v, self.maxvalue(depth, newboard, alpha, beta))
                 if v <= alpha:
                     break
                 else:
