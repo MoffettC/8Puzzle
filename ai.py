@@ -28,6 +28,7 @@ class Strategy(abstractstrategy.Strategy):
         val = 0
         
         boardTuple = board
+        rowCtr = 0
         for row in boardTuple:
             col = 0;
             for piece in row:
@@ -37,13 +38,16 @@ class Strategy(abstractstrategy.Strategy):
                         val += 2
                     if (row == 3 & col == 4) | (row == 4 & col == 3):
                         val += 3
+                    val += board.disttoking(self.maxplayer, rowCtr)
                 if CheckerBoard.isplayer(self.minplayer, piece):
                     val -= 1
                     if  CheckerBoard.isking(piece):
                         val -= 2
                     if (row == 3 & col == 4) | (row == 4 & col == 3):
-                        val -= 3                      
+                        val -= 3 
+                    val += board.disttoking(self.minplayer, rowCtr)                     
                 col += 1 
+            rowCtr += 1
         return val
     
     def play(self, board):
@@ -90,14 +94,14 @@ class AlphaBetaSearch:
         """alphbeta (state) 
         - Run an alphabeta search from the current state.  Returns best action.
         """ 
-#         self.board = state
-#         initialVal = self.strategy.utility(self.strategy, self.board) #eval board
 
         v = self.maxvalue(self.plies, state, alpha = float("-inf"), beta = float("inf"))
-        actions =  self.strategy.curGame.get_actions(self.maxP) #maxplayer will always be the side that called it  
-#         for a in actions:
-#             if 
-        return 
+        actions =  state.get_actions(self.maxP) #maxplayer will always be the side that called it
+        for a in actions:
+            newboard = state.move(a)
+            x = self.strategy.utility(newboard)
+            if x >= v:
+                return a
         
         #move down tree, eval child boards, one of these initial moves is a best action
         #repeat until hitting max plies, prune along the way
@@ -106,38 +110,54 @@ class AlphaBetaSearch:
     # define other helper methods as needed   
     def maxvalue(self, depth, state, alpha, beta):
         self.depthLvl += 1
-        isDone = CheckerBoard.is_terminal(self.strategy.curGame)
+        isDone = CheckerBoard.is_terminal(state)
+        
         if isDone[0]:
-            v = self.strategy.utility(self.strategy.curGame.board)
-        elif self.depthLvl == depth:
-            return v    
+            v = self.strategy.utility(state)
+            
+        elif self.depthLvl >= depth:
+            v = float('-inf')
+            actions = state.get_actions(self.maxP) 
+            for a in actions:
+                newboard = state.move(a)
+                w = self.strategy.utility(newboard)
+                v = max(v, w)
+
         else:
             v = float('-inf')
-            actions = self.strategy.curGame.get_actions(self.maxP)
+            actions = state.get_actions(self.maxP)
             for a in actions:
-                newboard = self.strategy.curGame.move(a)
+                newboard = state.move(a)
                 v = max(v, self.minvalue(depth, newboard, alpha, beta))
                 if v >= beta:
                     break
                 else:
-                    alpha = beta(beta, v) 
+                    alpha = min(beta, v) 
         return v
     
     def minvalue(self, depth, state, alpha, beta):
         self.depthLvl += 1
-        isDone = CheckerBoard.is_terminal(self.strategy.curGame)
+        isDone = CheckerBoard.is_terminal(state)
+        
         if isDone[0]:
-            v = self.strategy.utility(self.strategy.curGame.board)
-        elif self.depthLvl == depth:
-            return v
+            v = self.strategy.utility(state)
+            
+        elif self.depthLvl >= depth:
+            v = float('inf')
+            actions = state.get_actions(self.maxP) 
+            for a in actions:
+                newboard = state.move(a)
+                w = self.strategy.utility(newboard)
+                v = min(v, w)
+
         else:
             v  = float("inf")
-            actions = self.strategy.curGame.get_actions(self.minP)
+            actions = state.get_actions(self.minP)
             for a in actions:
-                newboard = self.strategy.curGame.move(a)
+                newboard = state.move(a)
                 v = min(v, self.maxvalue(depth, newboard, alpha, beta))
                 if v <= alpha:
                     break
                 else:
-                    beta = alpha(alpha, v) 
+                    beta = max(alpha, v) 
         return v
