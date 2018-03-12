@@ -71,6 +71,10 @@ def Game(red=human.Strategy, black=ai.Strategy,
         
         results = blackplayer.play(checkerGame)
         checkerGame = results[0]
+        x = checkerGame.is_terminal()
+        won = x[0]
+        if won:
+            break
         results = redplayer.play(checkerGame)
         checkerGame = results[0]
     
