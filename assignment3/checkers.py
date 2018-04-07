@@ -63,18 +63,25 @@ def Game(red=human.Strategy, black=ai.Strategy,
     redplayer = red('r', checkerGame, maxplies)
     blackplayer = black('b', checkerGame, maxplies)
 
-    results = redplayer.play(checkerGame)
+    results = redplayer.play(checkerGame) #initial move
     checkerGame = results[0]
     won = False
     
-    while (not won):
+    while (not won): #repeat player moves until won
         x = checkerGame.is_terminal()
         won = x[0]
-        
+
         results = blackplayer.play(checkerGame)
         checkerGame = results[0]
+        x = checkerGame.is_terminal()
+        won = x[0]
+        if won:
+            break
+        
         results = redplayer.play(checkerGame)
         checkerGame = results[0]
+        x = checkerGame.is_terminal()
+        won = x[0]
     
     print("Finished")
     return

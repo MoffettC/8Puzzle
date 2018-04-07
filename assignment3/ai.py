@@ -36,12 +36,13 @@ class Strategy(abstractstrategy.Strategy):
             for piece in row:
                 if CheckerBoard.isplayer(self.maxplayer, piece):
                     val += 1
-                    if  CheckerBoard.isking(piece):
+                    if  CheckerBoard.isking(piece): #if a king 
                         val += 2
-                    if (row == 3 & col == 4) | (row == 4 & col == 3):
+                    if (row == 3 & col == 4) | (row == 4 & col == 3): #if player has control of center
                         val += 3
-                    val += board.disttoking(self.maxplayer, rowCtr)
-                if CheckerBoard.isplayer(self.minplayer, piece):
+                    val += board.disttoking(self.maxplayer, rowCtr) #if player closer to king row
+                    
+                if CheckerBoard.isplayer(self.minplayer, piece): #same heuristics but for other player
                     val -= 1
                     if  CheckerBoard.isking(piece):
                         val -= 2
@@ -99,15 +100,12 @@ class AlphaBetaSearch:
 
         v = self.maxvalue(self.plies, state, alpha = float("-inf"), beta = float("inf"))
         actions =  state.get_actions(self.maxP) #maxplayer will always be the side that called it
-        for a in actions:
+        
+        for a in actions: #find actions that would apply the best move from current state
             newboard = state.move(a)
             x = self.strategy.utility(newboard)
             if x >= v:
                 return a
-        
-        #move down tree, eval child boards, one of these initial moves is a best action
-        #repeat until hitting max plies, prune along the way
-        #return best action
          
     # define other helper methods as needed   
     def maxvalue(self, depth, state, alpha, beta):
@@ -115,17 +113,17 @@ class AlphaBetaSearch:
         isDone = CheckerBoard.is_terminal(state)
         
         if isDone[0]:
-            v = self.strategy.utility(state)
+            v = self.strategy.utility(state) #if terminal state
             
-        elif self.depthLvl >= depth:
+        elif self.depthLvl >= depth: #if cutoff depth hit
             v = float('-inf')
             actions = state.get_actions(self.maxP) 
-            for a in actions:
+            for a in actions: #choose move at depth
                 newboard = state.move(a)
                 w = self.strategy.utility(newboard)
                 v = max(v, w)
 
-        else:
+        else:                       #if neither, then continue searching
             v = float('-inf')
             actions = state.get_actions(self.maxP)
             for a in actions:
@@ -142,17 +140,17 @@ class AlphaBetaSearch:
         isDone = CheckerBoard.is_terminal(state)
         
         if isDone[0]:
-            v = self.strategy.utility(state)
+            v = self.strategy.utility(state) #if terminal state
             
-        elif self.depthLvl >= depth:
+        elif self.depthLvl >= depth: #if cutoff depth hit
             v = float('inf')
             actions = state.get_actions(self.maxP) 
-            for a in actions:
+            for a in actions:   #choose move at depth
                 newboard = state.move(a)
                 w = self.strategy.utility(newboard)
                 v = min(v, w)
 
-        else:
+        else:                       #if neither, then keep searching
             v  = float("inf")
             actions = state.get_actions(self.minP)
             for a in actions:
