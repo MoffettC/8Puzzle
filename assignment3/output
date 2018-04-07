@@ -1,0 +1,146 @@
+ #Christopher Moffett and Margaret Lee 
+#819886646               817587037
+ 
+   0  1  2  3  4  5  6  7 
+0     b     b     b     b 
+1  b     b     b     b    
+2     b     b     b     b 
+3  .     .     .     .    
+4     .     .     .     . 
+5  r     r     r     r    
+6     r     r     r     r 
+7  r     r     r     r    
+a:  [(5, 0), (4, 1)]
+b:  [(5, 2), (4, 1)]
+c:  [(5, 2), (4, 3)]
+d:  [(5, 4), (4, 3)]
+e:  [(5, 4), (4, 5)]
+f:  [(5, 6), (4, 5)]
+g:  [(5, 6), (4, 7)]
+r move, choose by letter or F to forfeit:  a
+a
+   0  1  2  3  4  5  6  7 
+0     b     b     b     b 
+1  b     b     b     b    
+2     .     b     b     b 
+3  b     .     .     .    
+4     r     .     .     . 
+5  .     r     r     r    
+6     r     r     r     r 
+7  r     r     r     r    
+a:  [(4, 1), (3, 2)]
+b:  [(5, 2), (4, 3)]
+c:  [(5, 4), (4, 3)]
+d:  [(5, 4), (4, 5)]
+e:  [(5, 6), (4, 5)]
+f:  [(5, 6), (4, 7)]
+g:  [(6, 1), (5, 0)]
+r move, choose by letter or F to forfeit:  e
+e
+   0  1  2  3  4  5  6  7 
+0     b     b     b     b 
+1  .     b     b     b    
+2     b     b     b     b 
+3  b     .     .     .    
+4     r     .     r     . 
+5  .     r     r     .    
+6     r     r     r     r 
+7  r     r     r     r    
+a:  [(4, 1), (3, 2)]
+b:  [(4, 5), (3, 4)]
+c:  [(4, 5), (3, 6)]
+d:  [(5, 2), (4, 3)]
+e:  [(5, 4), (4, 3)]
+f:  [(6, 1), (5, 0)]
+g:  [(6, 5), (5, 6)]
+h:  [(6, 7), (5, 6)]
+r move, choose by letter or F to forfeit:  f
+f
+   0  1  2  3  4  5  6  7 
+0     .     b     b     b 
+1  b     b     b     b    
+2     b     b     b     b 
+3  b     .     .     .    
+4     r     .     r     . 
+5  r     r     r     .    
+6     .     r     r     r 
+7  r     r     r     r    
+a:  [(4, 1), (3, 2)]
+b:  [(4, 5), (3, 4)]
+c:  [(4, 5), (3, 6)]
+d:  [(5, 2), (4, 3)]
+e:  [(5, 4), (4, 3)]
+f:  [(6, 5), (5, 6)]
+g:  [(6, 7), (5, 6)]
+h:  [(7, 0), (6, 1)]
+i:  [(7, 2), (6, 1)]
+r move, choose by letter or F to forfeit:  g
+g
+   0  1  2  3  4  5  6  7 
+0     .     b     b     b 
+1  b     b     b     b    
+2     .     b     b     b 
+3  b     b     .     .    
+4     r     .     r     . 
+5  r     r     r     r    
+6     .     r     r     . 
+7  r     r     r     r    
+a:  [(4, 5), (3, 4)]
+b:  [(4, 5), (3, 6)]
+c:  [(5, 2), (4, 3)]
+d:  [(5, 4), (4, 3)]
+e:  [(5, 6), (4, 7)]
+f:  [(7, 0), (6, 1)]
+g:  [(7, 2), (6, 1)]
+h:  [(7, 6), (6, 7)]
+r move, choose by letter or F to forfeit:  f
+f
+   0  1  2  3  4  5  6  7 
+0     .     b     b     b 
+1  .     b     b     b    
+2     b     b     b     b 
+3  b     b     .     .    
+4     r     .     r     . 
+5  r     r     r     r    
+6     r     r     r     . 
+7  .     r     r     r    
+a:  [(4, 5), (3, 4)]
+b:  [(4, 5), (3, 6)]
+c:  [(5, 2), (4, 3)]
+d:  [(5, 4), (4, 3)]
+e:  [(5, 6), (4, 7)]
+f:  [(7, 6), (6, 7)]
+r move, choose by letter or F to forfeit:  e
+e
+   0  1  2  3  4  5  6  7 
+0     .     b     b     b 
+1  .     b     b     b    
+2     b     .     b     b 
+3  b     b     b     .    
+4     r     .     r     r 
+5  r     r     r     .    
+6     r     r     r     . 
+7  .     r     r     r    
+a:  [(4, 1), (2, 3, (3, 2)), (0, 1, (1, 2))]
+b:  [(4, 5), (2, 3, (3, 4)), (0, 1, (1, 2))]
+r move, choose by letter or F to forfeit:  a
+a
+   0  1  2  3  4  5  6  7 
+0     R     b     b     b 
+1  .     .     b     b    
+2     b     .     b     b 
+3  b     .     .     .    
+4     .     .     .     r 
+5  r     r     r     b    
+6     r     r     r     . 
+7  .     r     r     r    
+a:  [(0, 1), (1, 2)]
+b:  [(0, 1), (1, 0)]
+c:  [(4, 7), (3, 6)]
+d:  [(5, 0), (4, 1)]
+e:  [(5, 2), (4, 1)]
+f:  [(5, 2), (4, 3)]
+g:  [(5, 4), (4, 3)]
+h:  [(5, 4), (4, 5)]
+i:  [(7, 6), (6, 7)]
+r move, choose by letter or F to forfeit:  

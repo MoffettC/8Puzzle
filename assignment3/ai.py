@@ -3,6 +3,8 @@
 ai - search & strategy module
 implement a concrete Strategy class and AlphaBetaSearch
 """
+#Christopher Moffett and Margaret Lee 
+#819886646               817587037
 import abstractstrategy
 from checkerboard import CheckerBoard
 

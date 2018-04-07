@@ -3,6 +3,8 @@ Created on Feb 22, 2015
 
 @author: mroch
 '''
+#Christopher Moffett and Margaret Lee 
+#819886646               817587037
 
 import time
 import datetime
