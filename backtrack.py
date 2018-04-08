@@ -16,14 +16,31 @@ def backtracking_search(csp,
     """
     
     # See Figure 6.5] of your book for details
-
+    assignment = csp.curr_domains
     def backtrack(assignment):
         """Attempt to backtrack search with current assignment
         Returns None if there is no solution.  Otherwise, the
         csp should be in a goal state.
         """
+        if csp.goal_test == True:
+            return True;
+        var = select_unassigned_variable(assignment, csp) 
         
-        raise NotImplemented
+        for value in order_domain_values(var, assignment, csp):
+            if csp.nconflicts(var, value, assignment) == 0:
+                
+                assignment.assign(var, value)
+                inferences = inference(csp, var, value, assignment, csp.suppose(var, value))
+                
+                if inferences != False:
+                    assignment.assign(var, value)
+                    result = backtrack(assignment)
+                    
+                    if result != False:
+                        return result
+            assignment.prune(var, value)
+    
+        return False
 
     # Call with empty assignments, variables accessed
     # through dynamic scoping (variables in outer
@@ -31,3 +48,4 @@ def backtracking_search(csp,
     result = backtrack({})
     assert result is None or csp.goal_test(result)
     return result
+

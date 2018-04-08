@@ -31,10 +31,12 @@ class CSP(Problem):
                                 conflict with var=val
         curr_domains[var]       Slot: remaining consistent values for var
                                 Used by constraint propagation routines.
+                                
     The following methods are used only by graph_search and tree_search:
         actions(state)          Return a list of actions
         result(state, action)   Return a successor of state
         goal_test(state)        Return true if all constraints satisfied
+        
     The following are just for debugging purposes:
         nassigns                Slot: tracks the number of assignments made
         display(a)              Print a human-readable representation
