@@ -13,10 +13,11 @@ def backtracking_search(csp,
     a function handle for selecting variables, 
     a function handle for selecting elements of a domain,
     and a set of inferences, solve the CSP using backtrack search
-    """
-    
+    """   
     # See Figure 6.5] of your book for details
+    
     assignment = csp.curr_domains
+    
     def backtrack(assignment):
         """Attempt to backtrack search with current assignment
         Returns None if there is no solution.  Otherwise, the
@@ -29,16 +30,16 @@ def backtracking_search(csp,
         for value in order_domain_values(var, assignment, csp):
             if csp.nconflicts(var, value, assignment) == 0:
                 
-                assignment.assign(var, value)
+                supposed = csp.suppose(var, value)
                 inferences = inference(csp, var, value, assignment, csp.suppose(var, value))
                 
                 if inferences != False:
-                    assignment.assign(var, value)
+                    csp.assign(var, value, assignment)
                     result = backtrack(assignment)
                     
                     if result != False:
                         return result
-            assignment.prune(var, value)
+            csp.prune(var, value, supposed)
     
         return False
 
