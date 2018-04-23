@@ -1,3 +1,8 @@
+# Chris Moffett    
+# 819886646    
+# Margaret Lee
+# 817587037
+
 '''
 Constraint propagation
 '''

@@ -1,17 +1,26 @@
+'''
+Created on Apr 15, 2018
 
-from csp_lib.sudoku import (Sudoku, easy1, harder1)
-from constraint_prop import AC3
-from csp_lib.backtrack_util import mrv
-from backtrack import backtracking_search
-from csp_lib.backtrack_util import forward_checking
+@author: mroch
+'''
 
-for puzzle in [easy1, harder1]:
-    s  = Sudoku(puzzle)  # construct a Sudoku problem
+from ml_lib.example_reader import CSVDataSet
+from ml_lib.learning import (DataSet, 
+                             DecisionTreeLearner, NeuralNetLearner)
+from std_cv import cross_validation
+from random import shuffle
+
+from copy import deepcopy
     
-    if puzzle == easy1:
-        AC3(s) 
-        s.display(s.infer_assignment())
-    else:
-        solved = backtracking_search(s, select_unassigned_variable=mrv, inference = forward_checking) is not None
+def learn(dataset):
+
+    raise NotImplemented
+            
+
     
-    print("\n\n") #separate
+    
+def main():
+    raise NotImplemented
+    
+if __name__ == '__main__':
+    main()

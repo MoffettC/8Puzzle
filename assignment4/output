@@ -1,0 +1,29 @@
+4 8 3 | 9 2 1 | 6 5 7
+9 6 7 | 3 4 5 | 8 2 1
+2 5 1 | 8 7 6 | 4 9 3
+------+-------+------
+5 4 8 | 1 3 2 | 9 7 6
+7 2 9 | 5 6 4 | 1 3 8
+1 3 6 | 7 9 8 | 2 4 5
+------+-------+------
+3 7 2 | 6 8 9 | 5 1 4
+8 1 4 | 2 5 3 | 7 6 9
+6 9 5 | 4 1 7 | 3 8 2
+
+
+Couldnt get the second half of the assignment working..... :(
+
+Traceback (most recent call last):
+  File "I:\repos\8Puzzle\driver.py", line 18, in <module>
+    solved = backtracking_search(s, select_unassigned_variable=mrv, inference = forward_checking) is not None
+  File "I:\repos\8Puzzle\backtrack.py", line 53, in backtracking_search
+    result = backtrack({})
+    .....
+    result = backtrack(assignment)
+  File "I:\repos\8Puzzle\backtrack.py", line 42, in backtrack
+    result = backtrack(assignment)
+  File "I:\repos\8Puzzle\backtrack.py", line 46, in backtrack
+    csp.prune(var, value, supposed) 
+  File "I:\repos\8Puzzle\csp_lib\csp.py", line 142, in prune
+    self.curr_domains[var].remove(value)
+ValueError: list.remove(x): x not in list

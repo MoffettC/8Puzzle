@@ -1,4 +1,7 @@
-
+# Chris Moffett    
+# 819886646    
+# Margaret Lee
+# 817587037
 
 from csp_lib.backtrack_util import (first_unassigned_variable, 
                                     unordered_domain_values,
@@ -16,7 +19,7 @@ def backtracking_search(csp,
     """   
     # See Figure 6.5] of your book for details
     
-    assignment = csp.curr_domains
+
     
     def backtrack(assignment):
         """Attempt to backtrack search with current assignment
@@ -30,16 +33,17 @@ def backtracking_search(csp,
         for value in order_domain_values(var, assignment, csp):
             if csp.nconflicts(var, value, assignment) == 0:
                 
-                supposed = csp.suppose(var, value)
-                inferences = inference(csp, var, value, assignment, csp.suppose(var, value))
+                supposed = csp.suppose(var, value) 
                 
+                inferences = inference(csp, var, value, assignment, supposed)           
                 if inferences != False:
-                    csp.assign(var, value, assignment)
+                    
+                    csp.assign(var, value, assignment) 
                     result = backtrack(assignment)
                     
                     if result != False:
                         return result
-            csp.prune(var, value, supposed)
+            csp.prune(var, value, supposed) 
     
         return False
 
